@@ -1,0 +1,81 @@
+<div class="div-btn">
+  <button mat-raised-button color="accent" class="btn"  (click)="openDialog()">
+    <mat-icon>add</mat-icon>
+    Add O.S
+  </button>
+</div>
+
+<mat-card class="card mat-elevation-z8">
+  <div class="tab">
+    <table
+      mat-table
+      [dataSource]="dataSource"
+      class="tabela"
+    >
+      <!-- OCORRÊNCIA -->
+      <ng-container matColumnDef="OCORRENCIA">
+        <th mat-header-cell *matHeaderCellDef>OCORRÊNCIA</th>
+        <td mat-cell *matCellDef="let row">{{ row.ocorrencia }}</td>
+      </ng-container>
+
+      <!-- LOJA -->
+      <ng-container matColumnDef="LOJA">
+        <th mat-header-cell *matHeaderCellDef>LOJA</th>
+        <td mat-cell *matCellDef="let row">{{ row.loja }}</td>
+      </ng-container>
+
+      <!-- MOTIVO -->
+      <ng-container matColumnDef="MOTIVO">
+        <th mat-header-cell *matHeaderCellDef>MOTIVO</th>
+        <td mat-cell *matCellDef="let row">{{ row.motivo }}</td>
+      </ng-container>
+
+      <!-- SUBMOTIVO -->
+      <ng-container matColumnDef="SUBMOTIVO">
+        <th mat-header-cell *matHeaderCellDef>SUBMOTIVO</th>
+        <td mat-cell *matCellDef="let row">{{ row.submotivo }}</td>
+      </ng-container>
+
+      <!-- ANALISTA -->
+      <ng-container matColumnDef="ANALISTA">
+        <th mat-header-cell *matHeaderCellDef>ANALISTA</th>
+        <td mat-cell *matCellDef="let row">{{ row.nome }}</td>
+      </ng-container>
+
+      <!-- DATA -->
+      <ng-container matColumnDef="DATA">
+        <th mat-header-cell *matHeaderCellDef>DATA</th>
+        <td mat-cell *matCellDef="let row">{{ row.date_create | date: "dd/MM/yyyy - (HH:mm:ss)" }}</td>
+      </ng-container>
+
+      <!-- STATUS -->
+      <ng-container matColumnDef="STATUS">
+        <th mat-header-cell *matHeaderCellDef>STATUS</th>
+        <td mat-cell *matCellDef="let row">{{ row.status }}</td>
+      </ng-container>
+
+      <!-- ACAO -->
+      <ng-container matColumnDef="ACAO">
+        <th mat-header-cell *matHeaderCellDef></th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-flat-button (click)="openDialogDetalhe(row.id)">
+            <mat-icon color="primary">search</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+
+
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+
+  </div>
+    
+    <mat-paginator
+      [pageSizeOptions]="[10, 15, 20]"
+      showFirstLastButtons
+      aria-label="Select page of periodic elements">
+    </mat-paginator>    
+</mat-card>
+<router-outlet></router-outlet>
+

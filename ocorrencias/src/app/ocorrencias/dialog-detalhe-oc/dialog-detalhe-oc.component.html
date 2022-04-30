@@ -1,0 +1,56 @@
+<h1 mat-dialog-title> Detalhes da Ocorrência</h1>
+<mat-dialog-content class="mat-typography">
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="validationDefault01">Ocorrência</label>
+      <input type="text" class="form-control" value="{{ detalhesOc.ocorrencia }}" readonly>
+    </div>
+    <div class="col-md-2 mb-3">
+      <label for="validationDefault02">Loja</label>
+      <input type="text" class="form-control" value="{{ detalhesOc.loja }}" readonly>
+    </div>
+    <div class="col-md-4 mb-3">
+      <label for="validationDefault02">Data da O.S</label>
+      <input type="text" class="form-control" value="{{ detalhesOc.date_create | date: 'dd/MM/yyyy - (HH:mm:ss)' }}" readonly>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="validationDefault01">Motivo</label>
+      <input type="text" class="form-control" value="{{ detalhesOc.motivo }}" readonly>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="validationDefault02">Submotivo</label>
+      <input type="text" class="form-control" value="{{ detalhesOc.submotivo }}" readonly>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="validationDefault01">Descrição</label>
+      <textarea class="form-control" cols="35" rows="7" readonly>{{ detalhesOc.descricao }}</textarea>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="validationDefault02">Triagem</label>
+      <textarea class="form-control" cols="35" rows="7" readonly>{{ detalhesOc.triagem }}</textarea>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 mb-3">
+      <label for="validationDefault01">Analista que gerou a O.S</label>
+      <input type="text" class="form-control" value="{{ detalhesOc.nome_create }}" readonly>
+    </div>
+    <div class="col-md-6 mb-3">
+      <label for="validationDefault02">Status</label>
+      <input type="text" class="form-control" value="{{ detalhesOc.status }}" readonly>
+    </div>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close>Cancel</button>
+  <button mat-button [mat-dialog-close]="true" cdkFocusInitial>Install</button>
+</mat-dialog-actions>
