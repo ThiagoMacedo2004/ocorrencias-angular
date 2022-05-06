@@ -14,6 +14,7 @@ export class ServicesService {
   private URL = '//10.20.11.151/angular-php/index.php'
   resposta: any = []
   user    : any = []
+  users   : any = []
   userAuth: boolean = false
 
   confgMsgError: MatSnackBarConfig = {
@@ -94,6 +95,22 @@ export class ServicesService {
 
   public getDetalheOc() {
     return this.resposta[0]
+  }
+
+  public getUsers() {
+    return this.http.get(this.URL, {
+      params: {
+        acao: 'getUsers'
+      }
+    })
+  }
+
+  public getVeiculos() {
+    return this.http.get(this.URL, {
+      params: {
+        acao: 'getVeiculos'
+      }
+    })
   }
 
 

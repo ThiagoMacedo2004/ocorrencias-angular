@@ -3,8 +3,17 @@
     flex-direction: column;
 }
 
-.titulo {
-    font-size: 1rem;
-    font: bold;
-    padding: 5px 0px;
+.header {
+    display: flex;
+}
+
+.header h2 {
+    background: red;
+    padding: 5px;
+    border-radius: 5px;
+    color: white;
+}
+
+.center {
+    flex: 1 1 auto;
 }

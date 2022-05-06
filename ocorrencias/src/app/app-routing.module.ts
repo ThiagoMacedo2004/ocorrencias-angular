@@ -1,3 +1,4 @@
+import { FinalizarOcComponent } from './ocorrencias/finalizar-oc/finalizar-oc.component';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './ocorrencias/login/login.component';
 import { NgModule, Component } from '@angular/core';
@@ -22,6 +23,17 @@ const routes: Routes = [
   {
     path:"home",
     component:TabelaOcComponent,
+    canActivate: [AuthGuard]
+  },
+
+  {
+    path:"finalizarOc",
+    component:FinalizarOcComponent,
+    canActivate: [AuthGuard]
+  }, 
+
+  {
+    path:"**", redirectTo: 'home', pathMatch: 'full' ,
     canActivate: [AuthGuard]
   }
 ];

@@ -40,8 +40,7 @@ export class TabelaOcComponent implements AfterViewInit, OnInit {
     this.dialog.open(DialogDetalheOcComponent, {
       width: '55%'
     })
-    
-    console.log(id)
+
     this.http.detalheOc(id)
    
   }

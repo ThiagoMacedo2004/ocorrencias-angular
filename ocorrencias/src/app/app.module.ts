@@ -17,6 +17,10 @@ import {MatSelectModule} from '@angular/material/select';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatExpansionModule} from '@angular/material/expansion';
+
+
 
 
 import { AppComponent } from './app.component';
@@ -27,6 +31,12 @@ import { LoginComponent } from './ocorrencias/login/login.component';
 import { ServicesService } from './services/services.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DialogDetalheOcComponent } from './ocorrencias/dialog-detalhe-oc/dialog-detalhe-oc.component';
+import { FinalizarOcComponent } from './ocorrencias/finalizar-oc/finalizar-oc.component';
+import { MatNativeDateModule, MAT_DATE_LOCALE, MAT_DATE_LOCALE_FACTORY } from '@angular/material/core';
+import { MAT_DATE_FORMATS } from '@angular/material/core';
+
+
+
 
 
 
@@ -37,7 +47,8 @@ import { DialogDetalheOcComponent } from './ocorrencias/dialog-detalhe-oc/dialog
     TabelaOcComponent,
     DialogOsComponent,
     LoginComponent,
-    DialogDetalheOcComponent
+    DialogDetalheOcComponent,
+    FinalizarOcComponent
   ],
   imports: [
     BrowserModule,
@@ -58,12 +69,21 @@ import { DialogDetalheOcComponent } from './ocorrencias/dialog-detalhe-oc/dialog
     ReactiveFormsModule,
     HttpClientModule,
     NgbModule,
-    MatSnackBarModule
+    MatSnackBarModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
+    MatExpansionModule
+   
   ],
   providers: [
     ServicesService,
     LoginComponent,
-    AuthGuard
+    AuthGuard,
+    {
+      provide: MAT_DATE_LOCALE,
+      useValue: 
+        'pt-BR'
+    }
   ],
   bootstrap: [AppComponent]
 })

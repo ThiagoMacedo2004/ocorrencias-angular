@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { ServicesService } from 'src/app/services/services.service';
@@ -13,7 +14,8 @@ export class DialogDetalheOcComponent implements OnInit {
 
   constructor(
     private service: ServicesService,
-    private dialoRef: MatDialogRef<DialogDetalheOcComponent>
+    private dialoRef: MatDialogRef<DialogDetalheOcComponent>,
+    private router: Router
   ) { }
   ngOnInit(): void {
     this.dialoRef.afterOpened().subscribe({
@@ -22,4 +24,9 @@ export class DialogDetalheOcComponent implements OnInit {
       }
     })
   }
+
+  finalizarOc(){
+    this.router.navigate(['/finalizarOc'])
+  }
+
 }

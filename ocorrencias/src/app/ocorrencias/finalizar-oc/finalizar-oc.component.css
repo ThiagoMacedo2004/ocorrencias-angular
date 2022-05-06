@@ -1,0 +1,45 @@
+.card {
+    width: 96%;
+    margin: 30px auto;
+    border-top: 3px solid #3f51b5 ;
+    border-radius: 4px 4px 0 0;
+    max-height: 630px;
+}
+
+.sub-card{
+    width: 49%;
+    margin: 20px 0;
+    border-top: 3px solid #3f51b5 ;
+    border-radius: 4px 4px 0 0;
+}
+
+.cards {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.center {
+    margin: 0 4px;
+}
+
+.linha {
+    margin-top: 35px;
+}
+
+.coluns-mat {
+    display: flex;
+}
+
+.coluns-mat .colun {
+    display: flex;
+    flex-direction: column;
+}
+
+.coluns-mat .colun-meio {
+    margin: 0 10px;
+}
+
+.coluns-mat mat-form-field {
+    width: 60%;
+}
