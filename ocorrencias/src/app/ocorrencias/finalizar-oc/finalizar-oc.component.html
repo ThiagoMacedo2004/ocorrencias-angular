@@ -55,7 +55,7 @@
         
           <mat-form-field appearance="fill">
             <mat-label>Data do atendimento</mat-label>
-            <input matInput [matDatepicker]="picker" formControlName="data">
+            <input matInput [matDatepicker]="picker" formControlName="data" [(ngModel)]="form.data">
             <mat-hint>DD/MM/AAAA</mat-hint>
             <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
             <mat-datepicker #picker></mat-datepicker>
@@ -63,7 +63,7 @@
 
           <mat-form-field class="center" appearance="fill">
             <mat-label>Selecione um Técnico</mat-label>
-            <mat-select formControlName="tecnico">
+            <mat-select formControlName="tecnico" [(ngModel)]="form.tecnicoAtend">
               <mat-option *ngFor="let user of users" value="{{ user.id }}" >{{ user.nome }}</mat-option>
             </mat-select>
             <mat-icon matSuffix>person</mat-icon>
@@ -72,7 +72,7 @@
 
           <mat-form-field appearance="fill">
             <mat-label>Veiculo</mat-label>
-            <mat-select formControlName="veiculo">
+            <mat-select formControlName="veiculo" [(ngModel)]="form.veiculo">
               <mat-option *ngFor="let row of veiculos" value="{{ row.id }}" >{{ row.modelo }} - {{ row.placa }}</mat-option>
             </mat-select>
             <mat-icon matSuffix>commute</mat-icon>
@@ -97,51 +97,51 @@
                   <div class="colun">
                     <mat-form-field appearance="fill">
                       <mat-label>Mouse</mat-label>
-                      <input matInput type="number" min="0" formControlName="mouse">
+                      <input matInput type="number" min="0" formControlName="mouse" [(ngModel)]="form.mouse">
                     </mat-form-field>
                 
                     <mat-form-field appearance="fill">
                       <mat-label>Teclado</mat-label>
-                      <input matInput type="number" min="0" formControlName="teclado">
+                      <input matInput type="number" min="0" formControlName="teclado" [(ngModel)]="form.teclado">
                     </mat-form-field>
 
                     <mat-form-field appearance="fill">
                       <mat-label>Monitor</mat-label>
-                      <input matInput type="number" min="0" formControlName="monitor">
+                      <input matInput type="number" min="0" formControlName="monitor" [(ngModel)]="form.monitor">
                     </mat-form-field>
                   </div>
 
                   <div class="colun colun-meio">
                     <mat-form-field appearance="fill">
                       <mat-label>Fonte</mat-label>
-                      <input matInput type="number" min="0" formControlName="fonte">
+                      <input matInput type="number" min="0" formControlName="fonte" [(ngModel)]="form.fonte">
                     </mat-form-field>
                 
                     <mat-form-field appearance="fill">
                       <mat-label>Telefone</mat-label>
-                      <input matInput type="number" min="0" formControlName="telefone">
+                      <input matInput type="number" min="0" formControlName="telefone" [(ngModel)]="form.telefone">
                     </mat-form-field>
 
                     <mat-form-field appearance="fill">
                       <mat-label>CPU</mat-label>
-                      <input matInput type="number" min="0" formControlName="cpu">
+                      <input matInput type="number" min="0" formControlName="cpu" [(ngModel)]="form.cpu">
                     </mat-form-field>
                   </div>
                   
                   <div class="colun">
                     <mat-form-field appearance="fill">
                       <mat-label>Imp TEF</mat-label>
-                      <input matInput type="number" min="0" formControlName="impTef">
+                      <input matInput type="number" min="0" formControlName="impTef" [(ngModel)]="form.impTef">
                     </mat-form-field>
                 
                     <mat-form-field appearance="fill">
                       <mat-label>HD</mat-label>
-                      <input matInput type="number" min="0" formControlName="hd">
+                      <input matInput type="number" min="0" formControlName="hd" [(ngModel)]="form.hd">
                     </mat-form-field>
 
                     <mat-form-field appearance="fill">
                       <mat-label>Cooler</mat-label>
-                      <input matInput type="number" min="0" formControlName="cooler">
+                      <input matInput type="number" min="0" formControlName="cooler" [(ngModel)]="form.cooler">
                     </mat-form-field>
                   </div>              
                 </div>

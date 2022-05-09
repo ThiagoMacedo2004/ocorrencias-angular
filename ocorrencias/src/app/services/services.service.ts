@@ -47,7 +47,15 @@ export class ServicesService {
         id   : id 
       }
     })
-  } 
+  }
+  
+  finalizarOc(obj: any) {
+    return this.http.post(this.URL, obj, {
+      params: {
+        acao: 'finalizarOc'
+      }
+    })
+  }
 
   getOcorrencias(){
     return this.http.get(this.URL, {

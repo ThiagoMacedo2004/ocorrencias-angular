@@ -55,6 +55,9 @@
           <div color="warn" *ngIf="row.status == 'Aberta'">
              <button mat-mini-fab color="warn"><span class="status"></span></button>
           </div>
+          <div color="warn" *ngIf="row.status == 'Finalizada'">
+            <button mat-mini-fab style="background-color: green;"><span class="status"></span></button>
+         </div>
         </td>
       </ng-container>
 

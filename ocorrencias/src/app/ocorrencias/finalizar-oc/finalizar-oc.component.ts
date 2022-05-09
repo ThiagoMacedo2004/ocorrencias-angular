@@ -1,3 +1,5 @@
+import { Router } from '@angular/router';
+import { Oc } from './../tabela-oc/tabela-oc.component';
 import { HttpErrorResponse } from '@angular/common/http';
 import { ServicesService } from 'src/app/services/services.service';
 import { Component, OnInit } from '@angular/core';
@@ -14,11 +16,14 @@ export class FinalizarOcComponent implements OnInit {
   detalhesOc  : any = []
   users       : any = []
   veiculos    : any = []
+  form        : any = {}
+  userLogon   : any = []
+  retorno     : any = []
 
   constructor(
     private service: ServicesService,
     private fb: FormBuilder,
-    private http: ServicesService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -26,6 +31,7 @@ export class FinalizarOcComponent implements OnInit {
     this.detalhesOc = this.service.getDetalheOc()
     this.getUserss();
     this.getVeiculos();
+    this.getUser()
   }
 
   formulario() {
@@ -33,23 +39,73 @@ export class FinalizarOcComponent implements OnInit {
       data      : ['',  Validators.required],
       tecnico   : ['',  Validators.required],
       veiculo   : ['',  Validators.required],
-      mouse     : ['0',  Validators.required],
-      teclado   : ['0',  Validators.required],
-      monitor   : ['0',  Validators.required],
-      fonte     : ['0',  Validators.required],
-      telefone  : ['0',  Validators.required],
-      cpu       : ['0',  Validators.required],
-      impTef    : ['0',  Validators.required],
-      hd        : ['0',  Validators.required],
-      cooler    : ['0',  Validators.required],
+      mouse     : [this.form.mouse    = 0],
+      teclado   : [this.form.teclado  = 0],
+      monitor   : [this.form.monitor  = 0],
+      fonte     : [this.form.fonte    = 0],
+      telefone  : [this.form.telefone = 0],
+      cpu       : [this.form.cpu      = 0],
+      impTef    : [this.form.impTef   = 0],
+      hd        : [this.form.hd       = 0],
+      cooler    : [this.form.cooler   = 0]
     })
   }
+
   finalizarOs(){
-    console.log(this.formGroup.value)
-    let data = new Date(this.formGroup.value.data)
-    let dataF = (data.getFullYear() + "-" + ((data.getUTCMonth()) + 1) + "-" + data.getDate())
-    console.log(dataF)
-    console.log(this.formGroup.value.data)
+    
+    const obj = {
+      id_oc        : this.detalhesOc.id,
+      analista     : this.form.analista,
+      data         : this.getDate(),
+      tecnicoAtend : this.form.tecnicoAtend,
+      veiculo      : this.form.veiculo,
+      mouse        : this.form.mouse   ? this.form.mouse   : 0,
+      teclado      : this.form.teclado ? this.form.teclado : 0,
+      monitor      : this.form.monitor ? this.form.monitor : 0,
+      fonte        : this.form.fonte   ? this.form.fonte   : 0,
+      telefone     : this.form.telefone? this.form.telefone: 0,
+      cpu          : this.form.cpu     ? this.form.cpu     : 0,
+      impTef       : this.form.impTef  ? this.form.impTef  : 0,
+      hd           : this.form.hd      ? this.form.impTef  : 0,
+      cooler       : this.form.cooler  ? this.form.cooler  : 0
+
+    }
+    
+    console.log(obj)
+
+    this.service.finalizarOc(JSON.stringify(obj)).subscribe({
+      next:(retorno) => {
+        this.retorno = retorno
+        if(!this.retorno.sucesso){
+          this.service.exibirMsgErro('Problema para finalizar a ocorrência.... Verifique com o Thiago')
+          
+        } else {
+          this.service.exibirMsgSucesso('Ocorrência ' + this.detalhesOc.ocorrencia + ' finalizada com sucesso !!')
+          this.router.navigate(['/home'])
+        }
+      },
+      error:(e) => {
+        this.service.exibirMsgErro(e)
+      }
+    })
+  }
+
+  getDate() {
+    let data = new Date(this.form.data)
+
+    let ano: any = data.getFullYear()
+    let mes: any = (data.getMonth()) + 1
+    let dia: any = data.getDate()
+
+    if(mes <= 9) {
+      mes = `0${mes}`
+    }
+
+    if(dia <= 9) {
+      dia = `0${dia}`
+    }
+
+    return `${ano}-${mes}-${dia}`
   }
 
 
@@ -74,6 +130,11 @@ export class FinalizarOcComponent implements OnInit {
        this.service.exibirMsgErro(e.message)
      }
    )
+  }
+
+  getUser() {
+    this.userLogon = this.service.getuser()
+    this.form.analista = this.userLogon.id
   }
 
 }

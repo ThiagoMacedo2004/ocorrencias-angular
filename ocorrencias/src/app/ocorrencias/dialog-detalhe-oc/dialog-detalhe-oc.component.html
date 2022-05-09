@@ -1,7 +1,7 @@
 <div class="header">
   <h1 mat-dialog-title> Detalhes da Ocorrência: {{ detalhesOc.ocorrencia }}</h1>
   <span class="center"></span>
-  <h2>{{ detalhesOc.status }}</h2>
+  <h2 [style.background]="cor">{{ detalhesOc.status }}</h2>
 </div>
 
 <mat-dialog-content class="mat-typography">

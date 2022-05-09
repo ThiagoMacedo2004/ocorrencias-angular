@@ -11,6 +11,7 @@ import { ServicesService } from 'src/app/services/services.service';
 export class DialogDetalheOcComponent implements OnInit {
 
   public detalhesOc: any = []
+  cor = ''
 
   constructor(
     private service: ServicesService,
@@ -21,9 +22,15 @@ export class DialogDetalheOcComponent implements OnInit {
     this.dialoRef.afterOpened().subscribe({
       next: () => {
         this.detalhesOc = this.service.getDetalheOc()
+        if(this.detalhesOc.status == 'Aberta') {
+          this.cor = 'red'
+        } else {
+          this.cor = 'green'
+        }
       }
     })
   }
+
 
   finalizarOc(){
     this.router.navigate(['/finalizarOc'])
