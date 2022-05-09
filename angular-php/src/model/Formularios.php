@@ -18,4 +18,12 @@ class Formularios extends Sql {
         return $result;
     }
 
+    public static function getVeiculos() {
+        $sql = new Sql;
+
+        $result = $sql->select("SELECT * FROM tb_veiculos ORDER BY modelo ASC");
+
+        return $result;
+    }
+
 }

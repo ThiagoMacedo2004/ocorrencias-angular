@@ -12,7 +12,7 @@ class Ocorrencias extends Sql {
             on (o.id_submotivo = s.id)
             inner join users u
             on (o.id_user_create = u.id)
-            where status = 'Aberta'
+            -- where status = 'Aberta'
             order by(o.date_create) DESC",[]);
 
         return $results;
@@ -101,5 +101,56 @@ class Ocorrencias extends Sql {
                         ]);
 
         return $results;
+    }
+
+
+    public static function finalizandoOc($dados){
+        $sql = new Sql;
+
+        return $sql->query(
+            "UPDATE tb_ocorrencias SET id_user_final = :id_user_final,
+                date_final = :date_final,
+                status = 'Finalizada',
+                id_user_tecnico = :id_user_tecnico,
+                id_veiculo = :id_veiculo WHERE id = :id", [
+                    ':id_user_final' => intval($dados->analista) ,
+                    ':date_final' => date('Y-m-d H:i:s', strtotime($dados->data)),
+                    ':id_user_tecnico' => intval($dados->tecnicoAtend) ,
+                    ':id_veiculo' => intval($dados->veiculo) ,
+                    ':id' => intval($dados->id_oc) 
+                ]
+        );
+        
+    }
+
+    public static function saveMateriais($dados) {
+
+        $sql = new Sql;
+
+        return $sql->query("INSERT INTO tb_materiais (id_ocorrencia, mouse, teclado, monitor, fonte, telefone, cpu, imp_tef, hd, cooler) 
+            VALUES(
+                :id_ocorrencia,
+                :mouse,
+                :teclado,
+                :monitor,
+                :fonte,
+                :telefone,
+                :cpu,
+                :imp_tef,
+                :hd,
+                :cooler
+            );", [
+                ':id_ocorrencia' => intval($dados->id_oc),
+                ':mouse' => intval($dados->mouse) ,
+                ':teclado' => intval($dados->teclado) ,
+                ':monitor' => intval($dados->monitor) ,
+                ':fonte' => intval($dados->fonte) ,
+                ':telefone' => intval($dados->telefone) ,
+                ':cpu' => intval($dados->cpu) ,
+                ':imp_tef' => intval($dados->impTef) ,
+                ':hd' => intval($dados->hd) ,
+                ':cooler' => intval($dados->cooler) 
+            ]
+        );
     }
 }

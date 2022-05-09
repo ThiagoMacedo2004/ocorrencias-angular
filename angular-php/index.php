@@ -20,6 +20,18 @@ switch ($_GET['acao']) {
         echo json_encode($result);
         break;
 
+    case 'getUsers':
+        $users   = new Usuario;
+        $result  = $users::getUsers();
+        echo json_encode($result);
+        break;
+
+    case 'getVeiculos':
+        $veiculos = new Formularios;
+        $result = $veiculos::getVeiculos();
+        echo json_encode($result);
+        break;
+
     case 'gravarOS':
         $salvarOs = new Ocorrencias;
         $verificarOc = $salvarOs::verificarOc($data->ocorrencia);
@@ -57,6 +69,27 @@ switch ($_GET['acao']) {
         echo json_encode($result);
         break;
 
+    case 'finalizarOc':
+        $finalizando = new Ocorrencias;
+        $resultF = $finalizando::finalizandoOc($data);
+        $resultM = $finalizando::saveMateriais($data);
+
+       if($resultF['sucesso'] && $resultM['sucesso']){
+           $validacao = array (
+               'sucesso' => 1,
+               'error'   => ''
+           );
+
+           echo json_encode($validacao);
+       } else {
+            $validacao = array (
+                'sucesso' => '',
+                'error'   => 1
+            );
+            echo json_encode($validacao);
+       }
+
+        break;
     
 }
 

@@ -45,9 +45,12 @@ class Usuario extends Sql {
         }
     }
 
-    public static function validarUsuario($matricula, $senha){
+    public static function getUsers(){
         $sql = new Sql;
+        
+        $results = $sql->select("SELECT * FROM users ORDER BY(nome) ASC");
 
+        return $results;
 
     }
 }
