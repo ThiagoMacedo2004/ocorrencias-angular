@@ -101,6 +101,25 @@ export class ServicesService {
     })
   }
 
+  public detalhesOcFina(idOc){
+    return this.http.get(this.URL, {
+      params: {
+        acao: 'detalhesOcFina',
+        id  : idOc
+      }
+    }).subscribe({
+      next: (data) => {
+        if(data){
+          this.resposta = data
+        } else{
+          this.exibirMsgErro('Erro ao verificar os detalhes da ocorrência...')
+        }
+      }, error: (e) => {
+        this.exibirMsgErro(e)
+      }
+    })
+  }
+
   public getDetalheOc() {
     return this.resposta[0]
   }

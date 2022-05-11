@@ -26,6 +26,7 @@ export class DialogDetalheOcComponent implements OnInit {
           this.cor = 'red'
         } else {
           this.cor = 'green'
+          console.log(this.detalhesOc, 'teste detalhes oc fina')
         }
       }
     })

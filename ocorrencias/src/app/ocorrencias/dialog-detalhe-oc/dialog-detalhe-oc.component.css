@@ -17,3 +17,29 @@
 .center {
     flex: 1 1 auto;
 }
+
+.linha2 {
+    margin-top: 10px;
+}
+
+.coluns-mat {
+    display: flex;
+}
+
+.coluns-mat .colun {
+    display: flex;
+    flex-direction: column;
+}
+
+.coluns-mat .colun-meio {
+    margin: 0 10px;
+}
+
+.coluns-mat mat-form-field {
+    width: 60%;
+}
+
+.colunas {
+    display: flex;
+    flex-direction: row;
+}

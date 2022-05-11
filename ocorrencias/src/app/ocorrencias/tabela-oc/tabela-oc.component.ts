@@ -18,6 +18,7 @@ export class TabelaOcComponent implements AfterViewInit, OnInit {
   displayedColumns: string[] = ['OCORRENCIA', 'LOJA', 'MOTIVO', 'SUBMOTIVO', 'ANALISTA', 'DATA', 'STATUS', 'ACAO'];
   dataSource :MatTableDataSource<Oc>
   result: any = []
+ 
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
@@ -36,12 +37,18 @@ export class TabelaOcComponent implements AfterViewInit, OnInit {
     })
   }
 
-  openDialogDetalhe(id){
+  openDialogDetalhe(id, _status, width){
     this.dialog.open(DialogDetalheOcComponent, {
-      width: '55%'
+     width: `${width}`
     })
 
-    this.http.detalheOc(id)
+    if(_status == 'Aberta') {
+      this.http.detalheOc(id)
+      
+    } else {
+      this.http.detalhesOcFina(id)
+      
+    }
    
   }
 
@@ -56,8 +63,7 @@ export class TabelaOcComponent implements AfterViewInit, OnInit {
 
   getOcorrencias(){
     this.http.getOcorrencias()
-    .subscribe((res) => {
-      console.log(res)     
+    .subscribe((res) => {     
       this.result = res
       this.dataSource = new MatTableDataSource(this.result)
       this.dataSource.paginator = this.paginator;

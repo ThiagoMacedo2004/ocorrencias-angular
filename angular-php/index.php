@@ -1,5 +1,6 @@
 <?php
 
+use LDAP\Result;
 
 require_once 'src/config/config.php';
 
@@ -84,12 +85,22 @@ switch ($_GET['acao']) {
        } else {
             $validacao = array (
                 'sucesso' => '',
-                'error'   => 1
+                'error'   => [
+                    'error1' => $resultF['error'],
+                    'error2' => $resultM['error']
+                ]
             );
             echo json_encode($validacao);
        }
 
         break;
+
+    case 'detalhesOcFina':
+        $detalhesOcFina = new Ocorrencias;
+        $result = $detalhesOcFina::getDetalheOcFina($_GET['id']);
+
+       
+        echo json_encode($result);
     
 }
 

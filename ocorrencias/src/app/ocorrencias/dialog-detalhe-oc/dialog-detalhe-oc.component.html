@@ -6,61 +6,160 @@
 
 <mat-dialog-content class="mat-typography">
 
-  <div class="row">
-    <!-- <div class="col-md-6 mb-3">
-      <label for="validationDefault01">Ocorrência</label>
-      <input type="text" class="form-control" value="{{ detalhesOc.ocorrencia }}" readonly>
-    </div> -->
-
-    <div class="col-md-2 mb-3">
-      <label for="validationDefault02">Loja</label>
-      <input type="text" class="form-control" value="{{ detalhesOc.loja }}" readonly>
+  <div class="colunas">
+    <div class="form-control">
+      <div class="row" >
+  
+        <div class="col-md-2 mb-2">
+          <label for="loja" class="col-form-label col-form-label-sm">Loja</label>
+          <input type="text" class="form-control form-control-sm" id="loja" value="{{ detalhesOc.loja }}" readonly>
+        </div>
+    
+        <div class="col-md-4 mb-2">
+          <label for="data" class="col-form-label col-form-label-sm">Data da O.S</label>
+          <input type="text" class="form-control form-control-sm" id="data" value="{{ detalhesOc.date_create | date: 'dd/MM/yyyy - (HH:mm:ss)' }}" readonly>
+        </div>
+    
+        <div class="col-md-6 mb-2">
+          <label for="analistaC" class="col-form-label col-form-label-sm">Analista que gerou a O.S</label>
+          <input type="text" class="form-control form-control-sm" id="analistaC" value="{{ detalhesOc.nome_create }}" readonly>
+        </div>
+    
+      </div>
+    
+      <div class="row">
+        <div class="col-md-6 mb-2">
+          <label for="motivo" class="col-form-label col-form-label-sm">Motivo</label>
+          <input type="text" class="form-control form-control-sm" id="motivo" value="{{ detalhesOc.motivo }}" readonly>
+        </div>
+    
+        <div class="col-md-6 mb-2">
+          <label for="submotivo" class="col-form-label col-form-label-sm" >Submotivo</label>
+          <input type="text" class="form-control form-control-sm" id="submotivo" value="{{ detalhesOc.submotivo }}" readonly>
+        </div>
+      </div>
+    
+      <div class="row">
+        <div class="col-md-6 mb-2">
+          <label for="descricao" class="col-form-label col-form-label-sm">Descrição</label>
+          <textarea class="form-control form-control-sm" id="descricao" cols="35" rows="7" readonly>{{ detalhesOc.descricao }}</textarea>
+        </div>
+    
+        <div class="col-md-6 mb-2">
+          <label for="triagem" class="col-form-label col-form-label-sm">Triagem</label>
+          <textarea class="form-control form-control-sm" id="thiagem" cols="35" rows="7" readonly>{{ detalhesOc.triagem }}</textarea>
+        </div>
+      </div>
+  
     </div>
-
-    <div class="col-md-4 mb-3">
-      <label for="validationDefault02">Data da O.S</label>
-      <input type="text" class="form-control" value="{{ detalhesOc.date_create | date: 'dd/MM/yyyy - (HH:mm:ss)' }}" readonly>
-    </div>
-
-    <div class="col-md-6 mb-3">
-      <label for="validationDefault01">Analista que gerou a O.S</label>
-      <input type="text" class="form-control" value="{{ detalhesOc.nome_create }}" readonly>
+  
+    <!-- detalhes do atendimento -->
+    <div class="form-control" style="width: 50%; margin-left: 5px ;" [hidden]="!detalhesOc.date_final">
+      <div class="row" >
+    
+        <div class="col-md-3 mb-2">
+          <label for="data" class="col-form-label col-form-label-sm">Atendida em</label>
+          <input type="text" class="form-control form-control-sm" id="data" value="{{ detalhesOc.date_final | date: 'dd/MM/yyyy' }}" readonly>
+        </div>
+    
+        <div class="col-md-5 mb-2">
+          <label for="analistaC" class="col-form-label col-form-label-sm">Técnico que atendeu a ocorrência</label>
+          <input type="text" class="form-control form-control-sm" id="analistaC" value="{{ detalhesOc.nome_tecnico }}" readonly>
+        </div>
+  
+        <div class="col-md-4 mb-2">
+          <label for="analistaC" class="col-form-label col-form-label-sm">Veiculo:</label>
+          <input type="text" class="form-control form-control-sm" id="analistaC" value="{{ detalhesOc.modelo }}-{{ detalhesOc.placa }}" readonly>
+        </div>
+    
+      </div>
+  
+      <div class="row">
+        <div class="col-md-12 mb-2">
+          <label for="analistaC" class="col-form-label col-form-label-sm">Analista que finalizou em sistema</label>
+          <input type="text" class="form-control form-control-sm" id="analistaC" value="{{ detalhesOc.nome_final }}" readonly>
+        </div>
+      </div>
+    
+      <div class="linha2">
+        <mat-accordion class="example-headers-align" multi>
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              <mat-panel-title>
+                Materiais utilizados na ocorrência
+                <mat-icon style="margin-left: 15px;">keyboard</mat-icon>
+              </mat-panel-title>
+              <!-- <mat-panel-description>
+                Informe os materiais utilizados na ocorrência
+                
+              </mat-panel-description> -->
+            </mat-expansion-panel-header>
+            
+            <div class="coluns-mat">
+              <div class="colun">
+                <mat-form-field appearance="fill">
+                  <mat-label>Mouse</mat-label>
+                  <input matInput value="{{ detalhesOc.mouse }}" readonly>
+                </mat-form-field>
+            
+                <mat-form-field appearance="fill">
+                  <mat-label>Teclado</mat-label>
+                  <input matInput value="{{ detalhesOc.teclado }}" readonly >
+                </mat-form-field>
+  
+                <mat-form-field appearance="fill">
+                  <mat-label>Monitor</mat-label>
+                  <input matInput value="{{ detalhesOc.monitor }}" readonly >
+                </mat-form-field>
+              </div>
+  
+              <div class="colun colun-meio">
+                <mat-form-field appearance="fill">
+                  <mat-label>Fonte</mat-label>
+                  <input matInput value="{{ detalhesOc.fonte }}" readonly >
+                </mat-form-field>
+            
+                <mat-form-field appearance="fill">
+                  <mat-label>Telefone</mat-label>
+                  <input matInput value="{{ detalhesOc.telefone }}" readonly >
+                </mat-form-field>
+  
+                <mat-form-field appearance="fill">
+                  <mat-label>CPU</mat-label>
+                  <input matInput value="{{ detalhesOc.cpu }}" readonly >
+                </mat-form-field>
+              </div>
+              
+              <div class="colun">
+                <mat-form-field appearance="fill">
+                  <mat-label>Imp TEF</mat-label>
+                  <input matInput value="{{ detalhesOc.imp_tef }}" readonly >
+                </mat-form-field>
+            
+                <mat-form-field appearance="fill">
+                  <mat-label>HD</mat-label>
+                  <input matInput value="{{ detalhesOc.hd }}" readonly >
+                </mat-form-field>
+  
+                <mat-form-field appearance="fill">
+                  <mat-label>Cooler</mat-label>
+                  <input matInput value="{{ detalhesOc.cooler }}" readonly >
+                </mat-form-field>
+              </div>              
+            </div>
+  
+          </mat-expansion-panel>
+        </mat-accordion>
+      </div>
+  
     </div>
 
   </div>
-
-  <div class="row">
-    <div class="col-md-6 mb-3">
-      <label for="validationDefault01">Motivo</label>
-      <input type="text" class="form-control" value="{{ detalhesOc.motivo }}" readonly>
-    </div>
-
-    <div class="col-md-6 mb-3">
-      <label for="validationDefault02">Submotivo</label>
-      <input type="text" class="form-control" value="{{ detalhesOc.submotivo }}" readonly>
-    </div>
-  </div>
-
-  <div class="row">
-    <div class="col-md-6 mb-3">
-      <label for="validationDefault01">Descrição</label>
-      <textarea class="form-control" cols="35" rows="7" readonly>{{ detalhesOc.descricao }}</textarea>
-    </div>
-
-    <div class="col-md-6 mb-3">
-      <label for="validationDefault02">Triagem</label>
-      <textarea class="form-control" cols="35" rows="7" readonly>{{ detalhesOc.triagem }}</textarea>
-    </div>
-  </div>
-
-    <!-- <div class="col-md-6 mb-3">
-      <label for="validationDefault02">Status</label>
-      <input type="text" class="form-control" value="{{ detalhesOc.status }}" readonly>
-    </div>
-  </div> -->
+  
+  
 
 </mat-dialog-content>
 <mat-dialog-actions align="end">
   <button mat-button mat-dialog-close>Sair</button>
-  <button mat-button [mat-dialog-close]="true" (click)="finalizarOc()" cdkFocusInitial>Finalizar</button>
+  <button mat-button [hidden]="detalhesOc.date_final" [mat-dialog-close]="true" (click)="finalizarOc()" cdkFocusInitial>Finalizar</button>
 </mat-dialog-actions>

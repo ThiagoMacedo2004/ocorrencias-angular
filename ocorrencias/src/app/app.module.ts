@@ -72,7 +72,9 @@ import { MAT_DATE_FORMATS } from '@angular/material/core';
     MatSnackBarModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatExpansionModule
+    MatExpansionModule,
+    MatInputModule,
+    MatFormFieldModule
    
   ],
   providers: [

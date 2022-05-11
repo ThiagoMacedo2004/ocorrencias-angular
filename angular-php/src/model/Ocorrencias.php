@@ -47,6 +47,25 @@ class Ocorrencias extends Sql {
         
     }
 
+    public static function getDetalheOcFina($id_oc) {
+        $sql = new Sql;
+
+        $results = $sql->select("SELECT o.*, mat.*, u.id, u.nome as nome_create, m.motivo, s.submotivo, us.nome  as nome_final, tec.nome as nome_tecnico, v.modelo, v.placa
+                                FROM tb_ocorrencias o
+                                inner join tb_motivos m     on (o.id_motivo       = m.id)
+                                inner join tb_submotivos s  on (o.id_submotivo    = s.id)
+                                inner join users u          on (o.id_user_create  = u.id)
+                                inner join users us         on (o.id_user_final   = us.id)
+                                inner join tb_veiculos v    on (o.id_veiculo      = v.id)
+                                inner join tb_materiais mat on (o.id              = mat.id_ocorrencia)
+                                inner join users tec        on (o.id_user_tecnico = tec.id)
+                                where o.id = :id;",[
+                                        ':id' => $id_oc
+                                ]);
+
+        return $results;
+    }
+
     public static function saveOc($data, $id) {
         $sql = new Sql();
 
@@ -114,7 +133,7 @@ class Ocorrencias extends Sql {
                 id_user_tecnico = :id_user_tecnico,
                 id_veiculo = :id_veiculo WHERE id = :id", [
                     ':id_user_final' => intval($dados->analista) ,
-                    ':date_final' => date('Y-m-d H:i:s', strtotime($dados->data)),
+                    ':date_final' => date('Y-m-d H:i:s', strtotime("{$dados->data} " . date('H:i:s'))),
                     ':id_user_tecnico' => intval($dados->tecnicoAtend) ,
                     ':id_veiculo' => intval($dados->veiculo) ,
                     ':id' => intval($dados->id_oc) 
@@ -141,15 +160,15 @@ class Ocorrencias extends Sql {
                 :cooler
             );", [
                 ':id_ocorrencia' => intval($dados->id_oc),
-                ':mouse' => intval($dados->mouse) ,
-                ':teclado' => intval($dados->teclado) ,
-                ':monitor' => intval($dados->monitor) ,
-                ':fonte' => intval($dados->fonte) ,
-                ':telefone' => intval($dados->telefone) ,
-                ':cpu' => intval($dados->cpu) ,
-                ':imp_tef' => intval($dados->impTef) ,
-                ':hd' => intval($dados->hd) ,
-                ':cooler' => intval($dados->cooler) 
+                ':mouse'    => intval($dados->mouse)     >= 0 ? intval($dados->mouse)   : 0,     
+                ':teclado'  => intval($dados->teclado)   >= 0 ? intval($dados->teclado) : 0,
+                ':monitor'  => intval($dados->monitor)   >= 0 ? intval($dados->monitor) : 0,
+                ':fonte'    => intval($dados->fonte)     >= 0 ? intval($dados->fonte)   : 0,
+                ':telefone' => intval($dados->telefone)  >= 0 ? intval($dados->telefone): 0, 
+                ':cpu'      => intval($dados->cpu)       >= 0 ? intval($dados->cpu)     : 0,
+                ':imp_tef'  => intval($dados->impTef)    >= 0 ? intval($dados->impTef)  : 0,
+                ':hd'       => intval($dados->hd)        >= 0 ? intval($dados->hd)      : 0,        
+                ':cooler'   => intval($dados->cooler)    >= 0 ? intval($dados->cooler)  : 0  
             ]
         );
     }

@@ -19,6 +19,9 @@ export class FinalizarOcComponent implements OnInit {
   form        : any = {}
   userLogon   : any = []
   retorno     : any = []
+  dia       : any
+  diaSete   : any
+  
 
   constructor(
     private service: ServicesService,
@@ -32,7 +35,17 @@ export class FinalizarOcComponent implements OnInit {
     this.getUserss();
     this.getVeiculos();
     this.getUser()
+    
   }
+
+  myFilter = (d: Date | null): boolean => {
+    const day = (d || new Date()).getDate();
+    let dia = new Date().getDate()
+   
+    // Prevent Saturday and Sunday from being selected.
+    return  day !== dia
+  };
+  
 
   formulario() {
     this.formGroup = this.fb.group({

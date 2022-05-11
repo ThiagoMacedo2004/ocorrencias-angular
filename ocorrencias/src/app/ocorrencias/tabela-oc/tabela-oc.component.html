@@ -6,12 +6,14 @@
 </div>
 
 <mat-card class="card mat-elevation-z8">
+
   <div class="tab">
     <table
       mat-table
       [dataSource]="dataSource"
       class="tabela"
     >
+
       <!-- OCORRÊNCIA -->
       <ng-container matColumnDef="OCORRENCIA">
         <th mat-header-cell *matHeaderCellDef>OCORRÊNCIA</th>
@@ -65,8 +67,11 @@
       <ng-container matColumnDef="ACAO">
         <th mat-header-cell *matHeaderCellDef></th>
         <td mat-cell *matCellDef="let row">
-          <button mat-button (click)="openDialogDetalhe(row.id)" >
+          <button mat-button (click)="row.status == 'Finalizada' ? openDialogDetalhe(row.id, row.status, '100%') : openDialogDetalhe(row.id, row.status, '55%')" >
             <mat-icon color="primary">search</mat-icon>
+          </button>
+          <button mat-button (click)="openDialogDetalhe(row.id)" >
+            <mat-icon color="primary">description</mat-icon>
           </button>
         </td>
       </ng-container>
