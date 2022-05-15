@@ -1,0 +1,19 @@
+mat-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 999;
+}
+
+* {
+    color: #fafafa;
+}
+
+.center {
+    flex: 1 1 auto;
+}
+
+.nome {
+    font-family: Roboto,Helvetica Neue,sans-serif;
+    font-size: 14px;
+    font-weight: 500;
+}

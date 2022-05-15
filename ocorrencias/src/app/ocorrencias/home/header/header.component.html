@@ -1,0 +1,16 @@
+<mat-toolbar style="background-color: #242a50 ;" class="mat-elevation-z8">
+  <span>Ocorrências Infraestrutura</span>
+  <span class="center"></span>
+  
+  <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
+    <mat-icon>more_vert</mat-icon>
+  </button>
+
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="logout()">
+      <mat-icon>logout</mat-icon>
+      <span>Sair</span>
+    </button>
+  </mat-menu>
+
+</mat-toolbar>

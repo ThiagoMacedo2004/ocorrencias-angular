@@ -1,0 +1,57 @@
+<mat-card class="card mat-elevation-z6 content">
+    <mat-card-title>Gerar O.S</mat-card-title>
+
+    <mat-card-content>
+        <form [formGroup]="formGroup">
+            <div class="linha">
+                <mat-form-field appearance="outline" class="input-oc">
+                    <mat-label>Ocorrência</mat-label>
+                    <input matInput type="text" formControlName="ocorrencia">
+                </mat-form-field>
+                
+                <mat-form-field appearance="outline" class="input-lj">
+                    <mat-label>Loja</mat-label>
+                    <input matInput type="text" formControlName="loja">
+                </mat-form-field>
+            </div>
+            
+            <div class="linha">
+                <mat-form-field appearance="outline" class="select-m">
+                    <mat-label>Motivo</mat-label>
+                    <mat-select  formControlName="motivo" (selectionChange)="changeMotivo($event)">
+                        <mat-option value="">--Selecione um Motivo--</mat-option>
+                        <mat-option *ngFor="let motivo of motivos" value="{{motivo.id}}">{{ motivo.motivo }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+    
+                <mat-form-field appearance="outline" class="select-sm">
+                    <mat-label>Submotivo</mat-label>
+                    <mat-select  formControlName="submotivo">
+                        <mat-option value="">--Selecione um Submotivo--</mat-option>
+                        <mat-option *ngFor="let row of submotivos" value="{{row.id}}">{{ row.submotivo }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            
+            <div class="linha">
+                <mat-form-field appearance="outline" class="text-des">
+                    <mat-label>Descrição</mat-label>
+                    <textarea matInput rows="10" formControlName="descricao"></textarea>
+                </mat-form-field>
+    
+                <mat-form-field appearance="outline">
+                    <mat-label>Triagem</mat-label>
+                    <textarea matInput rows="10" formControlName="triagem"></textarea>
+                </mat-form-field>
+            </div>
+        </form>
+
+        <mat-card-actions>
+            <button mat-raised-button color="warn" [mat-dialog-close]="true">Fechar</button>
+            <button mat-raised-button color="primary" [disabled]="!formGroup.valid" (click)="gravarOs()">Salvar</button>
+        </mat-card-actions>
+
+    </mat-card-content>
+
+</mat-card>
+    

@@ -2,7 +2,7 @@ import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { Component, OnInit, AfterViewInit } from '@angular/core';
 import { TabelaOcComponent } from './ocorrencias/tabela-oc/tabela-oc.component';
-import { HeaderComponent } from './ocorrencias/header/header.component';
+import { HeaderComponent } from './ocorrencias/home/header/header.component';
 import { DialogOsComponent } from './ocorrencias/dialog-os/dialog-os.component';
 import { ServicesService } from './services/services.service';
 import { LoginComponent } from './ocorrencias/login/login.component';
@@ -22,24 +22,31 @@ export class AppComponent implements  AfterViewInit {
   constructor(
     private services: ServicesService,
     private router  : Router
-  ){
+  ){}
 
-  }
+
   ngAfterViewInit(): void {
-    // this.services.verificarUrl(this.router.url)
-
-    // this.services.mostrarHeader.subscribe(
-    //   (mostrar) => {
-    //     if(mostrar){
-    //       console.log('true')
-    //       this.mostrarMenu = mostrar
-    //     } else {
-    //       console.log('teste falsa')
-    //       // this.router.navigate(['/login'])
-    //     }
-    //   }
-    // )
+    throw new Error('Method not implemented.');
   }
+
+  
+  ngOnInit(): void {
+    
+    this.services.verificarUrl(this.router.url)
+
+    this.services.mostrarHeader.subscribe(
+      (mostrar) => {
+        if(mostrar){
+          console.log('true')
+          this.mostrarMenu = mostrar
+        } else {
+          console.log('teste falsa')
+          this.mostrarMenu = mostrar
+          this.router.navigate(['/login'])
+        }
+      }
+    )
+ }
  
   
 }

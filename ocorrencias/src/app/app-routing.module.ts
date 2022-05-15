@@ -1,15 +1,16 @@
 import { FinalizarOcComponent } from './ocorrencias/finalizar-oc/finalizar-oc.component';
-import { AppComponent } from './app.component';
 import { LoginComponent } from './ocorrencias/login/login.component';
 import { NgModule, Component } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { TabelaOcComponent } from './ocorrencias/tabela-oc/tabela-oc.component';
 import { AuthGuard } from './guards/auth.guard';
+import { GerarOsComponent } from './ocorrencias/gerar-os/gerar-os.component';
 
 
 const routes: Routes = [
+
   {
-    path: "", redirectTo: 'home', pathMatch: 'full' ,
+    path: "", redirectTo: 'ocorrencias', pathMatch: 'full' ,
     canActivate: [AuthGuard]
   },
 
@@ -21,8 +22,14 @@ const routes: Routes = [
   },
 
   {
-    path:"home",
+    path:"ocorrencias",
     component:TabelaOcComponent,
+    canActivate: [AuthGuard]
+  },
+
+  {
+    path:"gerarOs",
+    component:GerarOsComponent,
     canActivate: [AuthGuard]
   },
 
@@ -33,7 +40,7 @@ const routes: Routes = [
   }, 
 
   {
-    path:"**", redirectTo: 'home', pathMatch: 'full' ,
+    path:"**", redirectTo: 'ocorrencias', pathMatch: 'full' ,
     canActivate: [AuthGuard]
   }
 ];

@@ -19,12 +19,13 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatExpansionModule} from '@angular/material/expansion';
-
-
-
+import {MatMenuModule} from '@angular/material/menu';
+import {MatDividerModule} from '@angular/material/divider';
+import {MatListModule} from '@angular/material/list';
+import {MatSidenavModule} from '@angular/material/sidenav'
 
 import { AppComponent } from './app.component';
-import { HeaderComponent } from './ocorrencias/header/header.component';
+import { HeaderComponent } from './ocorrencias/home/header/header.component';
 import { TabelaOcComponent } from './ocorrencias/tabela-oc/tabela-oc.component';
 import { DialogOsComponent } from './ocorrencias/dialog-os/dialog-os.component';
 import { LoginComponent } from './ocorrencias/login/login.component';
@@ -34,6 +35,10 @@ import { DialogDetalheOcComponent } from './ocorrencias/dialog-detalhe-oc/dialog
 import { FinalizarOcComponent } from './ocorrencias/finalizar-oc/finalizar-oc.component';
 import { MatNativeDateModule, MAT_DATE_LOCALE, MAT_DATE_LOCALE_FACTORY } from '@angular/material/core';
 import { MAT_DATE_FORMATS } from '@angular/material/core';
+import { HomeComponent } from './ocorrencias/home/home.component';
+import { SidebarComponent } from './ocorrencias/home/sidebar/sidebar.component';
+
+import { GerarOsComponent } from './ocorrencias/gerar-os/gerar-os.component';
 
 
 
@@ -48,7 +53,10 @@ import { MAT_DATE_FORMATS } from '@angular/material/core';
     DialogOsComponent,
     LoginComponent,
     DialogDetalheOcComponent,
-    FinalizarOcComponent
+    FinalizarOcComponent,
+    HomeComponent,
+    SidebarComponent,
+    GerarOsComponent
   ],
   imports: [
     BrowserModule,
@@ -74,7 +82,11 @@ import { MAT_DATE_FORMATS } from '@angular/material/core';
     MatNativeDateModule,
     MatExpansionModule,
     MatInputModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatMenuModule,
+    MatDividerModule,
+    MatListModule,
+    MatSidenavModule
    
   ],
   providers: [

@@ -19,8 +19,8 @@ export class FinalizarOcComponent implements OnInit {
   form        : any = {}
   userLogon   : any = []
   retorno     : any = []
-  dia       : any
-  diaSete   : any
+  dia         : any
+  diaSete     : any
   
 
   constructor(

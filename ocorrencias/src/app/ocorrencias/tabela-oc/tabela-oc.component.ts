@@ -15,9 +15,10 @@ import { ServicesService } from 'src/app/services/services.service';
 })
 export class TabelaOcComponent implements AfterViewInit, OnInit {
 
-  displayedColumns: string[] = ['OCORRENCIA', 'LOJA', 'MOTIVO', 'SUBMOTIVO', 'ANALISTA', 'DATA', 'STATUS', 'ACAO'];
-  dataSource :MatTableDataSource<Oc>
-  result: any = []
+  displayedColumns : string[] = ['LOJA','OCORRENCIA', 'MOTIVO', 'SUBMOTIVO', 'ANALISTA', 'DATA', 'STATUS', 'ACAO'];
+  dataSource       : MatTableDataSource<Oc>
+  result           : any = []
+  cor              : any = ''
  
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -26,6 +27,11 @@ export class TabelaOcComponent implements AfterViewInit, OnInit {
     private dialog: MatDialog,
     private http  : ServicesService
   ){}
+
+  ngOnInit(): void {
+    this.getOcorrencias()
+    
+  }
 
   openDialog(){
     this.dialog.open(DialogOsComponent,{
@@ -52,10 +58,7 @@ export class TabelaOcComponent implements AfterViewInit, OnInit {
    
   }
 
-  ngOnInit(): void {
-    this.getOcorrencias()
-    
-  }
+  
 
   ngAfterViewInit(): void {
     // this.dataSource.paginator = this.paginator;
@@ -65,6 +68,7 @@ export class TabelaOcComponent implements AfterViewInit, OnInit {
     this.http.getOcorrencias()
     .subscribe((res) => {     
       this.result = res
+
       this.dataSource = new MatTableDataSource(this.result)
       this.dataSource.paginator = this.paginator;
     })

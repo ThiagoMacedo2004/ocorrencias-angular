@@ -210,7 +210,7 @@ export class ServicesService {
       
     } else {
       this.mostrarHeader.emit(true)
-      this.router.navigate(['/home'])
+      this.router.navigate(['/ocorrencias'])
     }
   }
 

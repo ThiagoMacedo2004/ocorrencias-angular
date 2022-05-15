@@ -40,6 +40,7 @@ export class LoginComponent implements OnInit {
     this.http.login(obj, (dados) => {
       this.resposta = dados
       console.log(this.resposta.error)
+      this.router.navigate(['/'])
     })
   }
 
@@ -49,7 +50,7 @@ export class LoginComponent implements OnInit {
     this.http.mostrarHeader.subscribe(
       (res) => {
         if(res) {
-          this.router.navigate(['/home'])
+          this.router.navigate(['/ocorrencias'])
         } else {
           this.router.navigate(['/'])
         }

@@ -1,5 +1,8 @@
-<app-header ></app-header>
-<router-outlet ></router-outlet>
+<div *ngIf="mostrarMenu">
+    <app-header></app-header>
+    <app-sidebar></app-sidebar>
+</div>
 
-
-<!-- <app-tabela-oc></app-tabela-oc> -->
+<div *ngIf="!mostrarMenu">
+    <app-login></app-login>
+</div>
