@@ -1,29 +1,40 @@
-.card {
-    width: 95%;
-    margin: 10px auto;
-    border-top: 3px solid #3f51b5 ;
-    border-radius: 4px 4px 0 0;
-    max-height: 630px;
-}
-
-
 [mat-header-cell], tr.mat-header-row {
     position: sticky;
     top: 0;
     z-index: 999;
     padding-top: 0;
-    background-color: #242a50;
-    color: white; 
+    color: #353535; 
     height: 40px;
+    font-weight: bold;
+    border: 4px solid #fafafa;
+}
+
+.mat-row:hover {
+    background-color: rgb(224, 223, 223);
 }
 
 [mat-table] {
     width: 100%;
 }
 
+.header {
+    display: flex;
+    align-items: center;
+    font-size: 1.6rem;
+    padding: 15px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: #353535;
+    color: #fafafa; 
+}
+
+.header i {
+    margin-right: 8px;
+}
+
 .tab {
-    max-height: 538px;
+    max-height: 510px;
     overflow-y: auto;
+    margin-top: 5px;
 }
 
 .div-btn {
@@ -35,6 +46,7 @@
 }
 
 
+
 .tabela td:last-child{
     text-align: end;
 }
@@ -43,19 +55,19 @@
     font-size: 12px;
 }
 
-[mat-mini-fab] {
-    width: 30px;
-    height: 30px;
-}
 
 .borda-status-a {
-    border-left: 8px solid red;
+    border-left: 4px solid red;
 }
 
 .borda-status-f {
-    border-left: 8px solid green;
+    border-left: 4px solid green;
 }
 
 tr.mat-row {
     height: 52px;
+}
+
+[mat-table] {
+    border-collapse: unset;
 }

@@ -221,6 +221,17 @@ export class ServicesService {
 
   }
 
+  public pythonTest(email) {
+    this.http.get('//10.20.11.151:5000/',{ 
+      params: {
+        remetente: email
+      }
+    }).subscribe(
+      (data) => console.log(data),
+      (e) => console.log(e)
+    ) 
+  }
+
 
 
 }

@@ -59,12 +59,14 @@ export class GerarOsComponent implements OnInit {
   }
 
   gravarOs(){
-   console.log(this.formGroup.value)
-   const obj = JSON.stringify(this.formGroup.value)
+    console.log(this.formGroup.value)
+    const obj = JSON.stringify(this.formGroup.value)
 
-   this.user = this.http.getuser()
+    this.user = this.http.getuser()
+    
+    this.http.pythonTest(this.user.email)
 
-   this.http.gravaOS(obj, this.user.id).subscribe({
+    this.http.gravaOS(obj, this.user.id).subscribe({
      next:(res)=> {
        this.retorno = res
        if(!this.retorno.error){

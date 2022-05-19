@@ -14,6 +14,7 @@ export class SidebarComponent implements OnInit {
   user     : any
   pathFoto : any
   status   : string[] = ['Aberta(s)', 'Finalizada(s)'];
+  test     : any = ''
   
   constructor(
     private dialog : MatDialog,

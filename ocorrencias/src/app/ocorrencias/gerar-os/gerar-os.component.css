@@ -27,3 +27,31 @@ mat-form-field {
 .text-des {
     margin-right: 3%;
 }
+
+.header {
+    display: flex;
+    align-items: center;
+    font-size: 1.6rem;
+    padding: 15px;
+    font-family: Roboto, "Helvetica Neue", sans-serif;
+    background-color: #353535;
+    color: #fafafa; 
+}
+
+.header i {
+    margin-right: 8px;
+}
+
+.card {
+    width: 65%;
+    margin: 30px auto;
+}
+
+.card-footer {
+    display: flex;
+    justify-content: end;
+}
+
+button {
+    margin: 0 8px;
+}
