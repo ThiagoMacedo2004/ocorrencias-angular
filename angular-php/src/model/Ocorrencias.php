@@ -5,13 +5,11 @@ class Ocorrencias extends Sql {
     public static function getOcorrecias(){
         $sql = new Sql;
 
-        $results = $sql->select("SELECT o.*, u.nome, m.motivo, s.submotivo FROM tb_ocorrencias o
-            inner join tb_motivos m
-            on (o.id_motivo = m.id)
-            inner join tb_submotivos s
-            on (o.id_submotivo = s.id)
-            inner join users u
-            on (o.id_user_create = u.id)
+        $results = $sql->select("SELECT o.*, l.id as cod_loja, l.loja, u.nome, m.motivo, s.submotivo FROM tb_ocorrencias o
+            inner join tb_lojas l      on (o.id_loja = l.id)
+            inner join tb_motivos m    on (o.id_motivo = m.id)
+            inner join tb_submotivos s on (o.id_submotivo = s.id)
+            inner join users u         on (o.id_user_create = u.id)
             -- where status = 'Aberta'
             order by(o.date_create) DESC",[]);
 
@@ -50,8 +48,9 @@ class Ocorrencias extends Sql {
     public static function getDetalheOcFina($id_oc) {
         $sql = new Sql;
 
-        $results = $sql->select("SELECT o.*, mat.*, u.id, u.nome as nome_create, m.motivo, s.submotivo, us.nome  as nome_final, tec.nome as nome_tecnico, v.modelo, v.placa
+        $results = $sql->select("SELECT o.*, l.*, mat.*, u.id, u.nome as nome_create, m.motivo, s.submotivo, us.nome  as nome_final, tec.nome as nome_tecnico, v.modelo, v.placa
                                 FROM tb_ocorrencias o
+                                inner join tb_lojas l       on (o.id_loja = l.id)
                                 inner join tb_motivos m     on (o.id_motivo       = m.id)
                                 inner join tb_submotivos s  on (o.id_submotivo    = s.id)
                                 inner join users u          on (o.id_user_create  = u.id)
@@ -71,7 +70,7 @@ class Ocorrencias extends Sql {
 
         return $sql->query("INSERT INTO tb_ocorrencias (
             ocorrencia,
-            loja,
+            id_loja,
             prioridade,
             id_motivo,
             id_submotivo,
@@ -82,7 +81,7 @@ class Ocorrencias extends Sql {
             status)
             VALUE (
                 :ocorrencia,
-                :loja,
+                :id_loja,
                 :prioridade,
                 :id_motivo,
                 :id_submotivo,
@@ -93,7 +92,7 @@ class Ocorrencias extends Sql {
                 :status
             )", [
                 ':ocorrencia' => trim(strtoupper($data->ocorrencia))  ,
-                ':loja' => $data->loja,
+                ':id_loja' => intval($data->loja) ,
                 ':prioridade' => 'media',
                 ':id_motivo' => $data->motivo,
                 ':id_submotivo' => $data->submotivo,
@@ -108,15 +107,28 @@ class Ocorrencias extends Sql {
     public static function getOcorrencia($id) {
         $sql = new Sql;
 
-        $results = $sql->select("SELECT o.*, u.nome as nome_create, m.motivo, s.submotivo FROM tb_ocorrencias o
-                    inner join tb_motivos m
-                    on (o.id_motivo = m.id)
-                    inner join tb_submotivos s
-                    on (o.id_submotivo = s.id)
-                    inner join users u
-                    on (o.id_user_create = u.id)
+        $results = $sql->select("SELECT o.*, l.loja, u.nome as nome_create, m.motivo, s.submotivo FROM tb_ocorrencias o
+                    inner join tb_lojas l      on (o.id_loja = l.id)
+                    inner join tb_motivos m    on (o.id_motivo = m.id)
+                    inner join tb_submotivos s on (o.id_submotivo = s.id)
+                    inner join users u         on (o.id_user_create = u.id)
                     where o.id = :id",[
                             ':id' => $id
+                        ]);
+
+        return $results;
+    }
+
+    public static function getOcorrenciaPDF($oc) {
+        $sql = new Sql;
+
+        $results = $sql->select("SELECT o.*, l.loja, u.nome as nome_create, m.motivo, s.submotivo FROM tb_ocorrencias o
+                    inner join tb_lojas l      on (o.id_loja = l.id)
+                    inner join tb_motivos m    on (o.id_motivo = m.id)
+                    inner join tb_submotivos s on (o.id_submotivo = s.id)
+                    inner join users u         on (o.id_user_create = u.id)
+                    where o.ocorrencia = :oc",[
+                            ':oc' => $oc
                         ]);
 
         return $results;

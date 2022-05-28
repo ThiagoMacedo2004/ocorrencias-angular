@@ -1,3 +1,4 @@
+import { Router } from '@angular/router';
 import { DialogDetalheOcComponent } from './../dialog-detalhe-oc/dialog-detalhe-oc.component';
 import { HttpClient } from '@angular/common/http';
 import { DialogOsComponent } from './../../ocorrencias/dialog-os/dialog-os.component';
@@ -19,13 +20,15 @@ export class TabelaOcComponent implements AfterViewInit, OnInit {
   dataSource       : MatTableDataSource<Oc>
   result           : any = []
   cor              : any = ''
- 
+  user             : any
+  ocorrencia       : any = []
 
   @ViewChild(MatPaginator) paginator: MatPaginator;
 
   constructor(
-    private dialog: MatDialog,
-    private http  : ServicesService
+    private dialog : MatDialog,
+    private http   : ServicesService,
+    private router : Router
   ){}
 
   ngOnInit(): void {
@@ -43,19 +46,34 @@ export class TabelaOcComponent implements AfterViewInit, OnInit {
     })
   }
 
-  openDialogDetalhe(id, _status, width){
-    this.dialog.open(DialogDetalheOcComponent, {
-     width: `${width}`
-    })
-
+  openDialogDetalhe(id, _status, acao){
     if(_status == 'Aberta') {
-      this.http.detalheOc(id)
+      this.http.detalheOc(id, acao = '')
       
     } else {
       this.http.detalhesOcFina(id)
       
     }
    
+  }
+
+  encaminharOs(id) {
+    this.user = this.http.getuser()
+
+    this.http.getDetaOcEncaminhar(id).subscribe({
+      next: (data) => {
+        if(data) {
+          this.user     = this.http.getuser()
+          let oc        = data[0].ocorrencia
+          let remetente = this.user.email
+          let loja      = data[0].loja
+          this.http.reenviarPDF(remetente, oc, loja)
+          this.http.exibirMsgSucesso(`O.S ${data[0].ocorrencia}, Loja: ${data[0].loja}, enviada com sucesso !!`)
+        }
+
+      }
+    })
+    
   }
 
   
@@ -68,11 +86,17 @@ export class TabelaOcComponent implements AfterViewInit, OnInit {
     this.http.getOcorrencias()
     .subscribe((res) => {     
       this.result = res
-
+      console.log(this.result)
       this.dataSource = new MatTableDataSource(this.result)
       this.dataSource.paginator = this.paginator;
     })
   }
+
+  applyFilter(event: Event) {
+    const filterValue = (event.target as HTMLInputElement).value;
+    this.dataSource.filter = filterValue.trim().toLowerCase();
+  }
+
 }
 
 

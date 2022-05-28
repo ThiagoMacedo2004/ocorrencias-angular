@@ -21,6 +21,7 @@ export class FinalizarOcComponent implements OnInit {
   retorno     : any = []
   dia         : any
   diaSete     : any
+  cor         : any
   
 
   constructor(
@@ -32,6 +33,11 @@ export class FinalizarOcComponent implements OnInit {
   ngOnInit(): void {
     this.formulario()
     this.detalhesOc = this.service.getDetalheOc()
+    if(this.detalhesOc.status == 'Aberta') {
+      this.cor = 'red'
+    } else {
+      this.cor = 'green'
+    }
     this.getUserss();
     this.getVeiculos();
     this.getUser()
@@ -94,7 +100,7 @@ export class FinalizarOcComponent implements OnInit {
           
         } else {
           this.service.exibirMsgSucesso('Ocorrência ' + this.detalhesOc.ocorrencia + ' finalizada com sucesso !!')
-          this.router.navigate(['/home'])
+          this.router.navigate(['/ocorrencias'])
         }
       },
       error:(e) => {

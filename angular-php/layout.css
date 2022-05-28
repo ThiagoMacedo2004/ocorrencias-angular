@@ -1,0 +1,52 @@
+body {
+    margin: 1px;
+    font-size: 0.8rem;
+}
+
+.tabela {
+    width: 100%;
+    border: 2px solid black;
+    border-collapse: collapse;
+}
+
+.tabela .linha-1 td{
+    border: 1px solid black;
+    height: 100px;
+}
+
+.tabela .linha-1 .img {
+    text-align: center;
+    width: 30%;
+    border-right: 1px solid white;
+}
+
+.tabela .linha-1 .descricao {
+    text-align: center;
+    vertical-align:  middle;
+    font-size: 1.5rem;
+    width: 40%;
+}
+
+.tabela .linha-1 .informacoes {
+    text-align: left;
+    vertical-align:  top;
+}
+
+.info-oc {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+hr {
+    margin: 2 0 ;
+}
+
+.tabela .linha-2 td{
+    text-align: center;
+    vertical-align: middle;
+    font-size: 1rem;
+    font-weight: bold;
+    height: 20px;
+    column-span: all;
+}
+

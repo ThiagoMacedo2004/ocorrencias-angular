@@ -26,4 +26,11 @@ class Formularios extends Sql {
         return $result;
     }
 
+    public static function getLojas() {
+        $sql = new Sql;
+
+        return $sql->select("SELECT * FROM tb_lojas order by loja ASC");
+
+    }
+
 }

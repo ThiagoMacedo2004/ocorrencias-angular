@@ -17,7 +17,8 @@ export class GerarOsComponent implements OnInit {
   motivos     : any = []
   submotivos  : any = []
   submotivo =   new FormControl({value: ''}, Validators.required) //new FormControl({value:''})
-  user          : any
+  user        : any
+  lojas       : any = []
   
 
   constructor(
@@ -29,6 +30,7 @@ export class GerarOsComponent implements OnInit {
   ngOnInit(): void {
     this.formulario()
     this.getMotivos()
+    this.getLojas()
     this.submotivo.reset({value: '', disabled: true})
     // this.submotivo.disable({onlySelf: true})
   }
@@ -64,12 +66,15 @@ export class GerarOsComponent implements OnInit {
 
     this.user = this.http.getuser()
     
-    this.http.pythonTest(this.user.email)
-
     this.http.gravaOS(obj, this.user.id).subscribe({
      next:(res)=> {
        this.retorno = res
        if(!this.retorno.error){
+        this.http.salvarPdf(
+          this.user.email,
+          this.formGroup.value.ocorrencia,
+          this.formGroup.value.loja
+        )
         this.http.exibirMsgSucesso("Ocorrência: " + this.formGroup.value.ocorrencia + " Salva com sucesso!!");
         this.formGroup.reset();
         this.router.navigate(['/'])
@@ -101,6 +106,17 @@ export class GerarOsComponent implements OnInit {
         this.http.exibirMsgErro(e.message)
       }
     })
+  }
+
+  getLojas() {
+    this.http.getLojas().subscribe(
+      (dados) => {this.lojas = dados},
+      (e) => {this.http.exibirMsgErro(e)}
+    )
+  }
+
+  voltar() {
+    this.router.navigate(['/ocorrencias'])
   }
 
 }

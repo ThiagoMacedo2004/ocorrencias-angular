@@ -5,6 +5,12 @@ setlocale(LC_TIME, 'pt-BR', 'pt-BR.utf-8', 'portuguese');
 
 error_reporting(E_ALL ^ E_NOTICE);
 
+require_once '../angular-php/vendor/autoload.php';
+
+// require_once __DIR__ . '/../vendor/autoload.php';
+
+define('PATH_OS', '\\\\marabraz.com.br\\MAPEAMENTOS\\INFRAESTRUTURA\\LOJAS\\Planilha Ocorrências\\O.S_angular\\');
+
 header("Access-Control-Allow-Origin: *");
 header("Access-Control-Allow-Credentials: true");
 header("Access-Control-Allow-Headers: X-'Request'ed-With, Content-Type, Origin, Cache-Control, Pragma, Authorization, Accept, Accept-Encoding");
@@ -22,3 +28,5 @@ require_once(realpath(dirname(__FILE__) . '/session.php'));
 require_once(realpath(dirname(__FILE__) . '/../model/Ocorrencias.php'));
 require_once(realpath(dirname(__FILE__) . '/../model/Formularios.php'));
 require_once(realpath(dirname(__FILE__) . '/../model/Usuarios.php'));
+require_once(realpath(dirname(__FILE__) . '/../classes/PDF.php'));
+require_once(realpath(dirname(__FILE__) . '/../classes/Email.php'));

@@ -1,10 +1,10 @@
 <?php
 
-use LDAP\Result;
 
 require_once 'src/config/config.php';
 
 $data = json_decode(file_get_contents("php://input"));
+
 
 // if($_GET['acao']){
 //     echo $_GET['acao'];
@@ -12,6 +12,27 @@ $data = json_decode(file_get_contents("php://input"));
 // } else {
 //     echo "Erro";
 // }
+
+// $sql = new Sql;
+// $n = 1;
+// $loja = "{$n}";
+
+// do  {
+
+//     if(strlen($n) == 1) {
+//         $loja = "Loja-00{$n}";
+//     } elseif(strlen($n) == 2) {
+//         $loja = "Loja-0{$n}";
+//     } else {
+//         $loja = "Loja-{$n}";
+//     }
+
+//     $sql->select("INSERT INTO tb_lojas(loja) VALUES ('{$loja}')");
+
+//     echo "{$loja} acrescentada no banco de dados!";
+//     echo "<br>";
+//     $n++;
+// } while ($n <= 143);
 
 switch ($_GET['acao']) {
 
@@ -40,14 +61,65 @@ switch ($_GET['acao']) {
         if($verificarOc['error']){
             echo json_encode($verificarOc);
         } else {
-            $result   = $salvarOs::saveOc($data, $_GET['id']);
+            $result   = $salvarOs::saveOc($data, $_GET['id']);          
+
             echo json_encode($result);
         }
         break;
 
+    case 'salvarPDF':
+
+        ob_start();
+        $getDetalheOc = new Ocorrencias;
+        $result       = $getDetalheOc::getOcorrenciaPDF($_GET['ocorrencia']);
+        require_once '../angular-php/templateOc.php';
+        $pdf = new PDF(ob_get_clean());
+        
+        $pdf->salvar_pdf($result[0]['loja'], $result[0]['ocorrencia']);
+
+        $mail = new Email(
+            $_GET['email'],
+            'thiago.souza@marabraz.com.br',
+            "{$result[0]['loja']}-{$_GET['ocorrencia']}",
+            $result[0]['submotivo']
+        );
+
+        break;
+
+    case 'reenvio':
+
+        $getDetalheOc = new Ocorrencias;
+        $result       = $getDetalheOc::getOcorrenciaPDF($_GET['ocorrencia']);
+               
+    
+        $mail = new Email(
+            $_GET['email'],
+            'thiago.souza@marabraz.com.br',
+            "{$result[0]['loja']}-{$_GET['ocorrencia']}",
+            $result[0]['submotivo'],
+            $_GET['acao']
+
+        );
+
+        break;
+
     case 'detalheOc':
+        
+        ob_start();
         $getDetalheOc = new Ocorrencias;
         $result       = $getDetalheOc::getOcorrencia($_GET['id']);
+
+        require_once '../angular-php/templateOc.php';
+        $pdf = new PDF(ob_get_clean());
+        
+        $pdf->salvar_pdf($result[0]['loja'], $result[0]['ocorrencia']);
+        
+        echo json_encode($result);
+        break;
+
+    case 'getLojas':
+        $getLojas = new Formularios;
+        $result   = $getLojas::getLojas();
         echo json_encode($result);
         break;
 

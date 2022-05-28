@@ -14,9 +14,17 @@
                     <input matInput type="text" formControlName="ocorrencia">
                 </mat-form-field>
                 
-                <mat-form-field appearance="outline" class="input-lj">
+                <!-- <mat-form-field appearance="outline" class="input-lj">
                     <mat-label>Loja</mat-label>
                     <input matInput type="text" formControlName="loja">
+                </mat-form-field> -->
+
+                <mat-form-field appearance="outline" class="input-lj">
+                    <mat-label>Loja</mat-label>
+                    <mat-select  formControlName="loja">
+                        <mat-option value="">--Selecione uma Loja--</mat-option>
+                        <mat-option *ngFor="let row of lojas" value={{row.id}}>{{ row.loja }}</mat-option>
+                    </mat-select>
                 </mat-form-field>
             </div>
             
@@ -53,8 +61,15 @@
     
     </div>
     <div class="card-footer text-muted">
-        <button mat-raised-button color="warn" [mat-dialog-close]="true">Fechar</button>
-        <button mat-raised-button color="primary" [disabled]="!formGroup.valid" (click)="gravarOs()">Salvar</button>
+        <button mat-button color="warn" (click)="voltar()">
+            <i class="material-icons">arrow_back</i>
+            Voltar 
+        </button>
+        <button mat-raised-button color="primary" [disabled]="!formGroup.valid" (click)="gravarOs()">
+            <i class="material-icons">library_add</i>
+            Salvar  
+            
+        </button>
     </div>
 </div>
 

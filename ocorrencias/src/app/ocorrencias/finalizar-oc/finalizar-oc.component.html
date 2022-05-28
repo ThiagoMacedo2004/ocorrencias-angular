@@ -1,164 +1,258 @@
-<mat-card class="card mat-elevation-z8">
-  <mat-card-title>Finalizar Ocorrencia: {{ detalhesOc.ocorrencia }}</mat-card-title>
+<mat-card class="example-card mat-elevation-z8">
 
-  <div class="cards">
-    <mat-card class="sub-card mat-elevation-z4">
-           
-      <div class="row">
-       
-        <div class="col-md-2 mb-3">
-          <label for="validationDefault02">Loja</label>
-          <input type="text" class="form-control" value="{{ detalhesOc.loja }}" readonly>
-        </div>
-    
-        <div class="col-md-4 mb-3">
-          <label for="validationDefault02">Data da O.S</label>
-          <input type="text" class="form-control" value="{{ detalhesOc.date_create | date: 'dd/MM/yyyy - (HH:mm:ss)' }}" readonly>
-        </div>
-    
-        <div class="col-md-6 mb-3">
-          <label for="validationDefault01">Analista que gerou a O.S</label>
-          <input type="text" class="form-control" value="{{ detalhesOc.nome_create }}" readonly>
-        </div>
-    
-      </div>
-    
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label for="validationDefault01">Motivo</label>
-          <input type="text" class="form-control" value="{{ detalhesOc.motivo }}" readonly>
-        </div>
-    
-        <div class="col-md-6 mb-3">
-          <label for="validationDefault02">Submotivo</label>
-          <input type="text" class="form-control" value="{{ detalhesOc.submotivo }}" readonly>
-        </div>
-      </div>
-    
-      <div class="row">
-        <div class="col-md-6 mb-3">
-          <label for="validationDefault01">Descrição</label>
-          <textarea class="form-control" cols="35" rows="7" readonly>{{ detalhesOc.descricao }}</textarea>
-        </div>
-    
-        <div class="col-md-6 mb-3">
-          <label for="validationDefault02">Triagem</label>
-          <textarea class="form-control" cols="35" rows="7" readonly>{{ detalhesOc.triagem }}</textarea>
-        </div>
-      </div>
-    </mat-card>
+  <div class="header">
+    <mat-card-title>Detalhes da O.S</mat-card-title>
   
-    <mat-card class="sub-card mat-elevation-z4">
-      <mat-card-content>
-        <form [formGroup]="formGroup">
-
-        
-          <mat-form-field color="accent" appearance="fill">
-            <mat-label>Data do atendimento</mat-label>
-            <input matInput [matDatepicker]="picker1" [matDatepickerFilter]="myFilter" [(ngModel)]="form.data"  formControlName="data" >
-            <mat-hint>DD/MM/AAAA</mat-hint>
-            <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
-            <mat-datepicker #picker1 color="accent"></mat-datepicker>
-          </mat-form-field>
-
-          <mat-form-field class="center" appearance="fill">
-            <mat-label>Selecione um Técnico</mat-label>
-            <mat-select formControlName="tecnico" [(ngModel)]="form.tecnicoAtend">
-              <mat-option *ngFor="let user of users" value="{{ user.id }}" >{{ user.nome }}</mat-option>
-            </mat-select>
-            <mat-icon matSuffix>person</mat-icon>
-            <mat-hint align="end">Selecione o técnico que atendeu a ocorrência ^</mat-hint>
-          </mat-form-field>
-
-          <mat-form-field appearance="fill">
-            <mat-label>Veiculo</mat-label>
-            <mat-select formControlName="veiculo" [(ngModel)]="form.veiculo">
-              <mat-option *ngFor="let row of veiculos" value="{{ row.id }}" >{{ row.modelo }} - {{ row.placa }}</mat-option>
-            </mat-select>
-            <mat-icon matSuffix>commute</mat-icon>
-            <mat-hint align="end">Selecione o Veiculo do Técnico</mat-hint>
-          </mat-form-field>
-
-          <div class="linha">
-            <mat-accordion class="example-headers-align" multi>
-              <mat-expansion-panel>
-                <mat-expansion-panel-header>
-                  <mat-panel-title>
-                    Materiais
-                    <mat-icon style="margin-left: 15px;">keyboard</mat-icon>
-                  </mat-panel-title>
-                  <mat-panel-description>
-                    Informe os materiais utilizados na ocorrência
-                    
-                  </mat-panel-description>
-                </mat-expansion-panel-header>
-                
-                <div class="coluns-mat">
-                  <div class="colun">
-                    <mat-form-field appearance="fill">
-                      <mat-label>Mouse</mat-label>
-                      <input matInput type="number" min="0" formControlName="mouse" [(ngModel)]="form.mouse">
-                    </mat-form-field>
-                
-                    <mat-form-field appearance="fill">
-                      <mat-label>Teclado</mat-label>
-                      <input matInput type="number" min="0" formControlName="teclado" [(ngModel)]="form.teclado">
-                    </mat-form-field>
-
-                    <mat-form-field appearance="fill">
-                      <mat-label>Monitor</mat-label>
-                      <input matInput type="number" min="0" formControlName="monitor" [(ngModel)]="form.monitor">
-                    </mat-form-field>
-                  </div>
-
-                  <div class="colun colun-meio">
-                    <mat-form-field appearance="fill">
-                      <mat-label>Fonte</mat-label>
-                      <input matInput type="number" min="0" formControlName="fonte" [(ngModel)]="form.fonte">
-                    </mat-form-field>
-                
-                    <mat-form-field appearance="fill">
-                      <mat-label>Telefone</mat-label>
-                      <input matInput type="number" min="0" formControlName="telefone" [(ngModel)]="form.telefone">
-                    </mat-form-field>
-
-                    <mat-form-field appearance="fill">
-                      <mat-label>CPU</mat-label>
-                      <input matInput type="number" min="0" formControlName="cpu" [(ngModel)]="form.cpu">
-                    </mat-form-field>
-                  </div>
-                  
-                  <div class="colun">
-                    <mat-form-field appearance="fill">
-                      <mat-label>Imp TEF</mat-label>
-                      <input matInput type="number" min="0" formControlName="impTef" [(ngModel)]="form.impTef">
-                    </mat-form-field>
-                
-                    <mat-form-field appearance="fill">
-                      <mat-label>HD</mat-label>
-                      <input matInput type="number" min="0" formControlName="hd" [(ngModel)]="form.hd">
-                    </mat-form-field>
-
-                    <mat-form-field appearance="fill">
-                      <mat-label>Cooler</mat-label>
-                      <input matInput type="number" min="0" formControlName="cooler" [(ngModel)]="form.cooler">
-                    </mat-form-field>
-                  </div>              
-                </div>
-
-              </mat-expansion-panel>
-            </mat-accordion>
-          </div>
-        </form>
-      </mat-card-content>
-    </mat-card>
-
+    <span class="center"></span>
+  
+    <div class="detalhe">
+      <span class="label">Status</span> 
+      <h1 [style.color]="cor">{{ detalhesOc.status }}</h1>
+    </div>
   </div>
+
+  <mat-divider></mat-divider>
+
+  <mat-card-content>
+    <div class="caixa">
+      <div class="linha">
+        <div class="detalhe">
+          <span class="label">Loja</span> 
+          <h3>{{ detalhesOc.loja }}</h3>
+        </div>
+
+        <div class="detalhe">
+          <span class="label">Ocorrência</span> 
+          <h3>{{ detalhesOc.ocorrencia }}</h3>
+        </div>
+
+        <div class="detalhe">
+          <span class="label">Motivo</span> 
+          <h3>{{ detalhesOc.motivo }}</h3>
+        </div>
+
+        <div class="detalhe">
+          <span class="label">Submotivo</span> 
+          <h3>{{ detalhesOc.submotivo }}</h3>
+        </div>
+  
+        <div class="detalhe">
+          <span class="label">Analista que gerou a O.S</span> 
+          <h3>{{ detalhesOc.nome_create }}</h3>
+        </div>
+  
+        <div class="detalhe">
+          <span class="label">Data</span> 
+          <h3>{{ detalhesOc.date_create | date: 'dd/MM/yyyy - (HH:mm:ss)' }}</h3>
+        </div>
+  
+      </div>
+  
+      <div class="linha">
+        
+
+        <div class="detalhe l2">
+          <span class="label">Descrição</span> 
+          <h3>{{ detalhesOc.descricao }}</h3>
+        </div>
+  
+        <div class="detalhe l2">
+          <span class="label">Triagem</span> 
+          <h3>{{ detalhesOc.triagem }}</h3>
+        </div>
+      </div>
+
+      <hr>
+
+      <h2>Detalhes do Atendimento</h2>
+
+      <form [formGroup]="formGroup" *ngIf="detalhesOc.status == 'Aberta'">
+        <div class="linha">
+          <div class="detalhe">
+            <mat-form-field color="accent" appearance="fill">
+              <mat-label>Data do atendimento</mat-label>
+              <input matInput [matDatepicker]="picker1" [matDatepickerFilter]="myFilter" [(ngModel)]="form.data"  formControlName="data" >
+              <mat-hint>DD/MM/AAAA</mat-hint>
+              <mat-datepicker-toggle matSuffix [for]="picker1"></mat-datepicker-toggle>
+              <mat-datepicker #picker1 color="accent"></mat-datepicker>
+            </mat-form-field>
+          </div>
+
+          <div class="detalhe">
+            <mat-form-field class="center" appearance="fill">
+              <mat-label>Selecione um Técnico</mat-label>
+              <mat-select formControlName="tecnico" [(ngModel)]="form.tecnicoAtend">
+                <mat-option *ngFor="let user of users" value="{{ user.id }}" >{{ user.nome }}</mat-option>
+              </mat-select>
+              <mat-icon matSuffix>person</mat-icon>
+              <mat-hint align="end">Selecione o técnico que atendeu a ocorrência ^</mat-hint>
+            </mat-form-field>
+          </div>
+          <div class="detalhe">
+            <mat-form-field appearance="fill">
+              <mat-label>Veiculo</mat-label>
+              <mat-select formControlName="veiculo" [(ngModel)]="form.veiculo">
+                <mat-option *ngFor="let row of veiculos" value="{{ row.id }}" >{{ row.modelo }} - {{ row.placa }}</mat-option>
+              </mat-select>
+              <mat-icon matSuffix>commute</mat-icon>
+              <mat-hint align="end">Selecione o Veiculo do Técnico</mat-hint>
+            </mat-form-field>
+          </div>
+        </div>
+
+        <div class="linha" style="margin-top: 30px ;">
+          <mat-accordion class="mat-elevation-z2" multi>
+            <mat-expansion-panel>
+              <mat-expansion-panel-header>
+                <mat-panel-title>
+                  Materiais
+                  <mat-icon style="margin-left: 15px;">keyboard</mat-icon>
+                </mat-panel-title>
+                <mat-panel-description>
+                  Informe os materiais utilizados na ocorrência
+                  
+                </mat-panel-description>
+              </mat-expansion-panel-header>
+              
+              <div class="coluns-mat">
+                <div class="materiais">
+                  <mat-form-field appearance="fill">
+                    <mat-label>Mouse</mat-label>
+                    <input matInput type="number" min="0" formControlName="mouse" [(ngModel)]="form.mouse">
+                  </mat-form-field>
+              
+                  <mat-form-field appearance="fill">
+                    <mat-label>Teclado</mat-label>
+                    <input matInput type="number" min="0" formControlName="teclado" [(ngModel)]="form.teclado">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill">
+                    <mat-label>Monitor</mat-label>
+                    <input matInput type="number" min="0" formControlName="monitor" [(ngModel)]="form.monitor">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill">
+                    <mat-label>Fonte</mat-label>
+                    <input matInput type="number" min="0" formControlName="fonte" [(ngModel)]="form.fonte">
+                  </mat-form-field>
+              
+                  <mat-form-field appearance="fill">
+                    <mat-label>Telefone</mat-label>
+                    <input matInput type="number" min="0" formControlName="telefone" [(ngModel)]="form.telefone">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill">
+                    <mat-label>CPU</mat-label>
+                    <input matInput type="number" min="0" formControlName="cpu" [(ngModel)]="form.cpu">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill">
+                    <mat-label>Imp TEF</mat-label>
+                    <input matInput type="number" min="0" formControlName="impTef" [(ngModel)]="form.impTef">
+                  </mat-form-field>
+              
+                  <mat-form-field appearance="fill">
+                    <mat-label>HD</mat-label>
+                    <input matInput type="number" min="0" formControlName="hd" [(ngModel)]="form.hd">
+                  </mat-form-field>
+
+                  <mat-form-field appearance="fill">
+                    <mat-label>Cooler</mat-label>
+                    <input matInput type="number" min="0" formControlName="cooler" [(ngModel)]="form.cooler">
+                  </mat-form-field>
+                </div> 
+              </div>
+
+            </mat-expansion-panel>
+          </mat-accordion>
+        </div>
+      </form>
+
+      <div *ngIf="detalhesOc.status == 'Finalizada'">
+        <div class="linha" >
+          <div class="detalhe">
+            <span class="label">Data do Antendimento</span> 
+            <h3>{{ detalhesOc.date_final | date: 'dd/MM/yyyy' }}</h3>
+          </div>
+  
+          <div class="detalhe">
+            <span class="label">Técnico que exeutou a O.S</span> 
+            <h3>{{ detalhesOc.nome_tecnico }}</h3>
+          </div>
+  
+          <div class="detalhe">
+            <span class="label">Analista que finalizou</span> 
+            <h3>{{ detalhesOc.nome_final }}</h3>
+          </div>
+  
+          <div class="detalhe">
+            <span class="label">Veiculo utilizado</span> 
+            <h3>{{ detalhesOc.modelo }} {{ detalhesOc.placa }} </h3>
+          </div>
+    
+        </div>
+  
+        <h3>Materiais utilizados no atendimento</h3>
+  
+        <div class="linha">
+          <div class="detalhe">
+            <span class="label">Mouse</span> 
+            <h3>{{ detalhesOc.mouse }}</h3>
+          </div>
+  
+          <div class="detalhe">
+            <span class="label">Teclado</span> 
+            <h3>{{ detalhesOc.teclado }}</h3>
+          </div>
+  
+          <div class="detalhe">
+            <span class="label">Monitor</span> 
+            <h3>{{ detalhesOc.monitor }}</h3>
+          </div>
+  
+          <div class="detalhe">
+            <span class="label">Fonte</span> 
+            <h3>{{ detalhesOc.fonte }} </h3>
+          </div>
+  
+          <div class="detalhe">
+            <span class="label">Telefone</span> 
+            <h3>{{ detalhesOc.telefone }} </h3>
+          </div>
+  
+          <div class="detalhe">
+            <span class="label">CPU</span> 
+            <h3>{{ detalhesOc.cpu }} </h3>
+          </div>
+  
+          <div class="detalhe">
+            <span class="label">Imp TEF</span> 
+            <h3>{{ detalhesOc.imp_tef }} </h3>
+          </div>
+  
+          <div class="detalhe">
+            <span class="label">HD</span> 
+            <h3>{{ detalhesOc.hd }} </h3>
+          </div>
+  
+          <div class="detalhe">
+            <span class="label">Cooler</span> 
+            <h3>{{ detalhesOc.cooler }} </h3>
+          </div>
+    
+        </div>
+      </div>
+
+
+    </div>
+
+    <mat-divider></mat-divider>
+    
+  </mat-card-content>
   <mat-card-actions align="end">
     <button mat-raised-button color="warn" (click)="formGroup.reset()">Limpar</button>
     <button mat-raised-button color="primary" [disabled]="!formGroup.valid" (click)="finalizarOs()">Finalizar</button>
   </mat-card-actions>
-
 </mat-card>
 
 

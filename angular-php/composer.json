@@ -1,0 +1,20 @@
+{
+    "name": "00217314/angular-php",
+    "description": "ocorrencias em angular e php",
+    "type": "project",
+    "autoload": {
+        "psr-4": {
+            "00217314\\AngularPhp\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "Thiago Macedo",
+            "email": "tsouzamacedo@gmail.com"
+        }
+    ],
+    "require": {
+        "mpdf/mpdf": "^8.1",
+        "phpmailer/phpmailer": "^6.6"
+    }
+}

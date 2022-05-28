@@ -40,7 +40,7 @@ export class ServicesService {
     ) { }
 
   
-  gravaOS(obj: any, id: any){
+  public gravaOS(obj: any, id: any){
     return this.http.post(this.URL, obj,{
       params: {
         acao : 'gravarOS',
@@ -49,7 +49,7 @@ export class ServicesService {
     })
   }
   
-  finalizarOc(obj: any) {
+  public finalizarOc(obj: any) {
     return this.http.post(this.URL, obj, {
       params: {
         acao: 'finalizarOc'
@@ -57,7 +57,7 @@ export class ServicesService {
     })
   }
 
-  getOcorrencias(){
+  public getOcorrencias(){
     return this.http.get(this.URL, {
       params: {
         acao: 'getOcorrencias'
@@ -65,7 +65,15 @@ export class ServicesService {
     })
   }
 
-  getMotivos(){
+  public getLojas() {
+    return this.http.get(this.URL, {
+      params: {
+        acao: 'getLojas'
+      }
+    })
+  }
+
+  public getMotivos(){
     return this.http.get(this.URL, {
       params: {
         acao: 'getMotivos'
@@ -73,7 +81,7 @@ export class ServicesService {
     })
   }
 
-  getSubmotivos(idMotivo){
+  public getSubmotivos(idMotivo){
     return this.http.get(this.URL, {
       params: {
         acao: 'getSubmotivos',
@@ -82,7 +90,9 @@ export class ServicesService {
     })
   }
 
-  public detalheOc(idOc){
+
+
+  public detalheOc(idOc, acao){
     return this.http.get(this.URL, {
       params: {
         acao: 'detalheOc',
@@ -92,9 +102,13 @@ export class ServicesService {
       next: (data) => {
         if(data){
           this.resposta = data
+          if(acao != 'encaminhar') {
+            this.router.navigate(['/finalizarOc'])
+          } 
         } else{
           this.exibirMsgErro('Erro ao verificar os detalhes da ocorrência...')
         }
+        data
       }, error: (e) => {
         this.exibirMsgErro(e)
       }
@@ -111,6 +125,8 @@ export class ServicesService {
       next: (data) => {
         if(data){
           this.resposta = data
+          // console.log(this.resposta)
+          this.router.navigate(['/finalizarOc'])
         } else{
           this.exibirMsgErro('Erro ao verificar os detalhes da ocorrência...')
         }
@@ -122,6 +138,15 @@ export class ServicesService {
 
   public getDetalheOc() {
     return this.resposta[0]
+  }
+
+  public getDetaOcEncaminhar(idOc) {
+    return this.http.get(this.URL, {
+      params: {
+        acao: 'detalheOc',
+        id  : idOc
+      }
+    })
   }
 
   public getUsers() {
@@ -221,10 +246,13 @@ export class ServicesService {
 
   }
 
-  public pythonTest(email) {
-    this.http.get('//10.20.11.151:5000/',{ 
+  public salvarPdf(email, ocorrencia, loja) {
+    this.http.get(this.URL,{ 
       params: {
-        remetente: email
+        acao       : 'salvarPDF',
+        ocorrencia : ocorrencia,
+        loja       : loja,
+        email      : email
       }
     }).subscribe(
       (data) => console.log(data),
@@ -232,8 +260,21 @@ export class ServicesService {
     ) 
   }
 
+  public reenviarPDF(email, ocorrencia, loja){
+    this.http.get(this.URL,{ 
+      params: {
+        acao       : 'reenvio',
+        ocorrencia : ocorrencia,
+        loja       : loja,
+        email      : email
+      }
+    }).subscribe(
+      (data) => console.log(data),
+      (e) => console.log(e)
+    ) 
+  }
 
-
+  
 }
 
 

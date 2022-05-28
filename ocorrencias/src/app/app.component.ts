@@ -12,7 +12,7 @@ import { LoginComponent } from './ocorrencias/login/login.component';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent implements  AfterViewInit {
+export class AppComponent implements  OnInit {
   title = 'ocorrencias';
 
   mostrarMenu: boolean = false;
@@ -24,12 +24,7 @@ export class AppComponent implements  AfterViewInit {
     private router  : Router
   ){}
 
-
-  ngAfterViewInit(): void {
-    throw new Error('Method not implemented.');
-  }
-
-  
+    
   ngOnInit(): void {
     
     this.services.verificarUrl(this.router.url)

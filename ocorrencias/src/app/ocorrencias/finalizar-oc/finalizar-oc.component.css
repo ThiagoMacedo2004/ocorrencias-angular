@@ -1,45 +1,56 @@
-.card {
-    width: 98%;
-    margin: 30px auto;
-    border-top: 3px solid #3f51b5 ;
-    border-radius: 4px 4px 0 0;
-    max-height: 630px;
+.header {
+    display: flex;
+    align-items: center;
+    height: 57px
 }
 
-.sub-card{
-    width: 49%;
-    margin: 20px 0;
-    border-top: 3px solid #3f51b5 ;
-    border-radius: 4px 4px 0 0;
+.center {
+    flex: 1 1 auto;
 }
 
-.cards {
+.caixa {
+    display: flex;
+    flex-direction: column;
+}
+
+.linha {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
 
-.center {
-    margin: 0 4px;
+.detalhe {
+    margin-top: 8px;
+    
 }
 
-.linha {
-    margin-top: 35px;
+.detalhe .label {
+    color:  rgba(0,0,0,.54);
 }
 
-.coluns-mat {
-    display: flex;
+.detalhe h2 {
+    margin-top: -4px;
 }
 
-.coluns-mat .colun {
-    display: flex;
-    flex-direction: column;
+.l2 {
+    width: 49%;
 }
 
-.coluns-mat .colun-meio {
-    margin: 0 10px;
+.materiais {
+    justify-content: space-between;
+    max-width: 100%;
 }
 
-.coluns-mat mat-form-field {
-    width: 60%;
+.materiais mat-form-field  {
+    width: 10%;
+    margin-right: 10px;
+}
+
+h2 {
+    margin-bottom: 8px;
+}
+
+h3 {
+    padding: 3px;
+    border-radius: 10px 10px;
 }

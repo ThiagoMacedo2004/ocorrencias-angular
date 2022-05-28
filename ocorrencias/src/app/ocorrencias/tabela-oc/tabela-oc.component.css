@@ -9,6 +9,14 @@
     border: 4px solid #fafafa;
 }
 
+mat-form-field {
+    width: 100%;
+}
+
+.mat-row td {
+    font-size: 12px;
+}
+
 .mat-row:hover {
     background-color: rgb(224, 223, 223);
 }

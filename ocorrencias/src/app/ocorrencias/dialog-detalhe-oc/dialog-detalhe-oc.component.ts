@@ -22,6 +22,7 @@ export class DialogDetalheOcComponent implements OnInit {
     this.dialoRef.afterOpened().subscribe({
       next: () => {
         this.detalhesOc = this.service.getDetalheOc()
+        console.log(this.detalhesOc)
         if(this.detalhesOc.status == 'Aberta') {
           this.cor = 'red'
         } else {

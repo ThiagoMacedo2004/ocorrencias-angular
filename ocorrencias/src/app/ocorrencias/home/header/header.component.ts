@@ -12,19 +12,24 @@ export class HeaderComponent implements OnInit {
   nome        : any = []
   mostrarMenu : boolean
 
+
   constructor(
     private http   : ServicesService,
    
   ) { }
 
   ngOnInit(): void {
-  
+    this.getUser()
   }
 
   logout(): void {
     this.mostrarMenu = false
     this.http.exit()
     
+  }
+
+  getUser() {
+   this.nome = this.http.getuser()
   }
 
   

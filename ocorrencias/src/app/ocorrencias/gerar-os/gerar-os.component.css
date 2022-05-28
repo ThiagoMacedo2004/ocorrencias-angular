@@ -44,14 +44,23 @@ mat-form-field {
 
 .card {
     width: 65%;
-    margin: 30px auto;
+    margin: 5px auto;
 }
 
 .card-footer {
     display: flex;
-    justify-content: end;
+    justify-content: flex-end;
 }
 
 button {
     margin: 0 8px;
+}
+
+/* .btn {
+    display: flex;
+    align-items: center;
+} */
+
+button i {
+    margin-right: 5px;
 }
